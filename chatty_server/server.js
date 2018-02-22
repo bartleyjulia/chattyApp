@@ -46,7 +46,10 @@ wss.on('connection', function connection(ws) {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify(message))
       }
-
     })
+  })
+  ws.on('close', function close() {
+    const userCountObjectClose = {type: 'userCount', usercount: wss.clients.size};
+    wss.broadcast(userCountObjectClose);
   });
 });
