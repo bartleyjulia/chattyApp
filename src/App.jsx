@@ -8,6 +8,8 @@ import NavBar from './NavBar.jsx';
 
 import MessageList from './MessageList.jsx';
 
+
+
 class App extends Component {
 
 
@@ -15,44 +17,63 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [
-        { id: 1,
-          type: 'user',
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        { id: 2,
-          type: 'user',
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        },
-        { id: 3,
-          type: 'system',
-          content: "No fighting you two"
-        }
-      ]
+      currentUser: 'Bob',
+      messages: [],
+      usercount: 0,
     }
   }
 
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001")
-    console.log('connected to websocket');
+      console.log('connected to websocket');
+    this.socket.onopen = (event) => {
+      console.log('Connection open on server')
+    }
+    this.socket.onmessage = (event) => {
+      // console.log('event', event.data);
+      let newMessage = JSON.parse(event.data);
+      switch (newMessage.type) {
+        case 'incomingMessage':
+        newMessage.type = 'user'
+        break;
+        case 'incomingNotification':
+        newMessage.type = 'system'
+        break;
+        case 'userCount':
+        console.log(newMessage.usercount);
+
+        break;
+      }
+      const newMessages = this.state.messages.concat(newMessage);
+      this.setState({
+      messages: newMessages
+      });
+    }
   }
+
+  // newUserName(oldUsername, newUserName) => {
+  //   //// function for sending post notification to web socket
+  //     newUserName(this.state.currentUser, userName);
+  // };
 
   newMessage(messageText, userName) {
+    if (userName !== this.state.currentUser && userName !== '') {
+      this.setState({currentUser: userName});
+      const newUserNameObject = {
+        type: 'postNotification',
+        content: `${this.state.currentUser} has changed  their name to ${userName}`
+      }
+      this.socket.send(JSON.stringify(newUserNameObject));
+    }
     const newMessageObject = {
-      id: Math.random(),
-      type: 'user',
-      username: userName,
+      type: 'postMessage',
+      username: userName ? userName : this.state.currentUser,
       content: messageText
     };
-    console.log(newMessageObject);
-    const newMessages = this.state.messages.concat(newMessageObject);
-    this.setState({
-      messages: newMessages
-    });
-
+    console.log('message on client side', newMessageObject);
+    this.socket.send(JSON.stringify(newMessageObject))
   }
+
 
   render() {
     return (
