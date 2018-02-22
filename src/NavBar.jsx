@@ -4,7 +4,8 @@ class UserCountItem extends Component {
   render() {
     return (
       <div className="usercount">
-      <a>{this.props.}
+      <a> User count = </a>
+      <a>{this.props.usercount}</a>
       </div>
       )
   }
@@ -13,11 +14,14 @@ class UserCountItem extends Component {
 class NavBar extends Component {
 
   render(){
+
+
+
     return(
 
      <nav className="navbar">
         <a href="/" className="navbar-brand">Chatty</a>
-        <p> Usercount </p>
+        <UserCountItem usercount={this.props.usercount}/>
       </nav>
 
       );

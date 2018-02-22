@@ -40,8 +40,7 @@ class App extends Component {
         newMessage.type = 'system'
         break;
         case 'userCount':
-        console.log(newMessage.usercount);
-
+        this.setState({usercount: newMessage.usercount});
         break;
       }
       const newMessages = this.state.messages.concat(newMessage);
@@ -78,7 +77,7 @@ class App extends Component {
   render() {
     return (
           <div>
-      <NavBar/>
+      <NavBar usercount={this.state.usercount}/>
       <Messages/>
       <MessageList messages={this.state.messages} />
       <ChatBar newMessage={this.newMessage.bind(this)}/>
