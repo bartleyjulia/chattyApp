@@ -25,7 +25,7 @@ wss.broadcast = function broadcast(input){
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', function connection(ws) {
-  console.log(wss.clients.size);
+  console.log(wss.clients);
   const userCountObject = {type: 'userCount', usercount: wss.clients.size};
   wss.broadcast(userCountObject);
   ws.on('error', function error(error) {
@@ -42,6 +42,14 @@ wss.on('connection', function connection(ws) {
     }
     let uniqueID = uuidv4();
     message['id'] = uniqueID;
+    if (!message.userNameColour) {
+      let colours = ['cyan', 'purple', 'green', 'hotpink', 'orange']
+      let colour = colours[Math.floor(Math.random() * colours.length)];
+      message['userNameColour'] = colour;
+      console.log(message.userNameColour)
+    }
+
+    // let colours = ['cyan', 'purple']
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify(message))

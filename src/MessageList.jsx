@@ -13,7 +13,7 @@ class MessageList extends Component {
             if (message.type === 'user') {
               return (
                 <div>
-                <Message key={message.id} username={message.username} content={message.content}/>
+                <Message key={message.id} username={message.username} content={message.content} colour={message.userNameColour}/>
               </div>
               );
             } else {

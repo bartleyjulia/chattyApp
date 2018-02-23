@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: 'Bob',
+      currentUser: 'Anonymous',
       messages: [],
       usercount: 0,
     }
@@ -69,9 +69,10 @@ class App extends Component {
     const newMessageObject = {
       type: 'postMessage',
       username: userName ? userName : this.state.currentUser,
-      content: messageText
+      content: messageText,
+      userNameColour: ''
     };
-    console.log('message on client side', newMessageObject);
+    // console.log('message on client side', newMessageObject);
     this.socket.send(JSON.stringify(newMessageObject))
   }
 
