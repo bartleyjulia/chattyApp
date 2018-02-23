@@ -27,7 +27,7 @@ class ChatBar extends Component {
 
   render(){
     return(
-        <footer className="chatbar">
+        <footer id='chatbar' className="chatbar">
         <input
         value={this.state.userName}
         onChange={this.onUserTextChange.bind(this)}

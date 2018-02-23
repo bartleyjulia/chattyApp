@@ -1,26 +1,8 @@
 import React, {Component} from 'react';
 
+import Message from './Message.jsx';
 
-class MessageItem extends Component {
-  render(){
-           return (
-          <div className="message">
-          <span className="message-username">{this.props.username}</span>
-          <span className="message-content">{this.props.content}</span>
-          </div>
-          )
-  }
-}
-
-class SystemMessage extends Component {
-  render () {
-    return (
-        <div className="message system">
-          {this.props.content}
-        </div>
-    )
-  }
-}
+import SystemMessage from './SystemMessage.jsx';
 
 
 class MessageList extends Component {
@@ -30,11 +12,15 @@ class MessageList extends Component {
     const messageListItems = this.props.messages.map((message) => {
             if (message.type === 'user') {
               return (
-                <MessageItem key={message.id} username={message.username} content={message.content}/>
+                <div>
+                <Message key={message.id} username={message.username} content={message.content}/>
+              </div>
               );
             } else {
               return (
+                <div>
                 <SystemMessage key={message.id} content={message.content}/>
+                </div>
               );
 
             }

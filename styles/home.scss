@@ -1,17 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Arimo');
+@import url('https://fonts.googleapis.com/css?family=Kalam:400,700');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
 body {
   background: white;
   color: black;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-family: 'Open Sans';
+  font-size: 20px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: tomato;
-  border-top: 1px solid black;
   bottom: 0;
   display: flex;
   left: 0;
@@ -22,7 +23,6 @@ body {
 
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -45,6 +45,7 @@ body {
 
 .message.system {
   font-style: italic;
+  opacity: 0.6;
   padding: 5px 20px;
 }
 
@@ -65,8 +66,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
-  border-bottom: 1px solid black;
+  font-family: 'Lobster';
   height: 60px;
   left: 0;
   padding: 0 10px;
@@ -81,17 +81,21 @@ body {
 
 }
 .euphemism {
+  color: white;
+  opacity: 0.7;
   float: right;
-  padding: 24px;
+  font-size: 24px;
+  padding: 20px;
 }
 .navbar-brand {
-  color: inherit;
+  opacity: 0.7;
+  color: white;
   display: block;
   float: left;
-  font-weight: 700;
-  font-size: 28px;
+  font-weight: 400;
+  font-size: 40px;
   height: 60px;
   line-height: 60px;
-  padding: 0 10px;
+  padding: 2px;
   text-decoration: none;
 }

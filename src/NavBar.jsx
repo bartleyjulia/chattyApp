@@ -29,8 +29,6 @@ class Euphemism extends Component {
 }
 
 
-
-
 class UserCountItem extends Component {
       // switch (this.props.usercount.value())
 
@@ -51,7 +49,7 @@ class NavBar extends Component {
     console.log('user count in nav bar component', this.props.usercount);
 
     return(
-     <nav className="navbar">
+     <nav id='navbar' className="navbar">
         <a href="/" className="navbar-brand">Chatterbox</a>
         <Euphemism phraseIndex={this.props.usercount}/>
       </nav>
