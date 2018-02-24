@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 
 import ChatBar from './ChatBar.jsx';
 
-
 import NavBar from './NavBar.jsx';
 
 import MessageList from './MessageList.jsx';
 
 
-
 class App extends Component {
-
-
 
   constructor(props) {
     super(props);
@@ -19,22 +15,28 @@ class App extends Component {
       currentUser: 'Anonymous',
       messages: [],
       usercount: 0,
+      usercolour: 0
     }
   }
 
-
-
-
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001")
-      console.log('connected to websocket');
+      console.log('Connected to websocket');
     this.socket.onopen = (event) => {
+      // Sends out signal to websocket to set colour
+    if (this.state.usercolour === 0){
+      const newUserColourObject = {
+        type: 'setColour',
+      }
+      this.socket.send(JSON.stringify(newUserColourObject))
+    }
       console.log('Connection open on server')
     }
+
     this.socket.onmessage = (event) => {
-      // console.log('event', event.data);
       let newMessage = JSON.parse(event.data);
       switch (newMessage.type) {
+        // Converts messages into system/ user message type
         case 'incomingMessage':
         newMessage.type = 'user'
         break;
@@ -44,6 +46,9 @@ class App extends Component {
         case 'userCount':
         this.setState({usercount: newMessage.usercount});
         break;
+        case 'setColour':
+        // Sets specific user's state.usercolour
+        this.setState({usercolour: newMessage.userNameColour})
       }
       const newMessages = this.state.messages.concat(newMessage);
       this.setState({
@@ -52,30 +57,24 @@ class App extends Component {
     }
   }
 
-  // newUserName(oldUsername, newUserName) => {
-  //   //// function for sending post notification to web socket
-  //     newUserName(this.state.currentUser, userName);
-  // };
-
+// Function for processing input from chat bar and sending it out to websocket
   newMessage(messageText, userName) {
     if (userName !== this.state.currentUser && userName !== '') {
       this.setState({currentUser: userName});
       const newUserNameObject = {
         type: 'postNotification',
-        content: `${this.state.currentUser} has changed  their name to ${userName}`
+        content: `${this.state.currentUser} has changed  their name to ${userName}`,
       }
       this.socket.send(JSON.stringify(newUserNameObject));
     }
     const newMessageObject = {
       type: 'postMessage',
-      username: userName ? userName : this.state.currentUser,
+      username: userName || this.state.currentUser,
       content: messageText,
-      userNameColour: ''
+      userNameColour: this.state.usercolour
     };
-    // console.log('message on client side', newMessageObject);
     this.socket.send(JSON.stringify(newMessageObject))
   }
-
 
   render() {
     return (

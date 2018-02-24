@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-
+// System message elements
 class SystemMessage extends Component {
   render () {
     return (

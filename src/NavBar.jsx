@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 
 
-
-
+// User count component
 class Euphemism extends Component {
-
 
   render () {
 
-
-      const synonyms = ['loudmouth', 'windbag', 'gasbag', 'prattler', 'yammerer', 'clatterfart', 'blabberer', 'chin-wagger', 'gossip', 'motormouth', 'mumbler', 'confabulator', 'raconteur', 'conversationalist', 'babbler', 'blowhard', 'bigmouth', 'gabber', 'talking parrot', 'tattletale']
+// Array and function for assigning random euphemism for user count
+      const synonyms = ['loudmouth', 'windbag', 'gasbag', 'prattler', 'yammerer', 'clatterfart', 'blabberer', 'chin-wagger', 'gossip', 'motormouth', 'mumbler', 'rando', 'whiner', 'confabulator', 'raconteur', 'conversationalist', 'glip glop' ,'babbler', 'blowhard', 'bigmouth', 'gabber', 'talking parrot', 'tattletale']
       const randomEuphemism = synonyms[Math.floor(Math.random() * synonyms.length)];
 
       if (this.props.phraseIndex === 1) {
@@ -28,33 +26,14 @@ class Euphemism extends Component {
   }
 }
 
-
-class UserCountItem extends Component {
-      // switch (this.props.usercount.value())
-
-  render() {
-    return (
-      <div className="user-count">
-      <a>{this.props.usercount}</a>
-      </div>
-      )
-  }
-}
-
 class NavBar extends Component {
-
-
   render(){
-
-    console.log('user count in nav bar component', this.props.usercount);
-
     return(
      <nav id='navbar' className="navbar">
         <a href="/" className="navbar-brand">Chatterbox</a>
         <Euphemism phraseIndex={this.props.usercount}/>
       </nav>
-
-      );
+    );
   }
 }
 export default NavBar;

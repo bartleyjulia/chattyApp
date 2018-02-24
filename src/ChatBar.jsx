@@ -10,6 +10,8 @@ class ChatBar extends Component {
     };
   }
 
+// Chatbar event listeners
+
   onMessageTextChange(event) {
     this.setState({messageText: event.target.value})
   }
@@ -33,9 +35,6 @@ class ChatBar extends Component {
         onChange={this.onUserTextChange.bind(this)}
         className="chatbar-username" placeholder="Your Name (Optional)"
         onKeyPress={this.onMessageKeyPress.bind(this)}/>
-
-
-
 
         <input
         value={this.state.messageText}
