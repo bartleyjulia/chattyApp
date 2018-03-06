@@ -1,13 +1,12 @@
 Chatterbox
 =====================
 
-### The best thing since sliced bread (and who though that could be topped?)
+### The best thing since sliced bread (and who thought that could be topped?)
 
 Chatterbox is a fun and functional chatroom app built with React and depploying the use of websockets for real time communication.
 
-![Screenshot of happy users](https://raw.githubusercontent.com/bartleyjulia/chattyApp/master/build/github%20images/ChatterBox.png)
-![Screenshot of euphemism detail](https://raw.githubusercontent.com/bartleyjulia/chattyApp/master/build/github%20images/ChatterBoxDetail.png)
-![Another screenshot of usercount](https://raw.githubusercontent.com/bartleyjulia/chattyApp/master/build/github%20images/ChatterBoxDetail2.png)
+![Screenshot of happy users](https://github.com/bartleyjulia/chattyApp/blob/master/build/github%20images/winner.gif)
+
 
 
 ### Usage
